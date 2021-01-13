@@ -1,2 +1,2 @@
 # usedCarFactory
-An app that interacts with a SQL database to create used cars
+An app that interacts with an SQL database to create used cars
