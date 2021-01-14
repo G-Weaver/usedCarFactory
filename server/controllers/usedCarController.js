@@ -6,7 +6,7 @@ const usedCarController = {};
 
 // capture everything currently in vehicles
 usedCarController.allVehicles = (req, res, next) => {
-
+    
     // query string to select everything from vehicles table
     const getAllQuery = 'SELECT * FROM vehicles'
 
