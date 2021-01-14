@@ -1,7 +1,7 @@
 // grabbing query from usedCarModels
 const db = require('../models/usedCarModels')
 
-// object literal for use/export
+// object literal to populate/export
 const usedCarController = {};
 
 // capture everything currently in vehicles
@@ -12,19 +12,21 @@ usedCarController.allVehicles = (req, res, next) => {
 
     // sending the query string to the database
     db.query(getAllQuery)
-        // if everything is successful, capture the response
-        .then(response => {
-            console.log(response);
-            next()
+    // if successful, capture the response
+    .then(response => {
+        // grab everything in our vehicles table and store it
+        // currently stored as an array of objects
+        res.locals.all = response.rows;
+        next()
+    })
+    // if not, make me aware of any error
+    .catch(err => {
+        return next({
+            log: `Database error`,
+            status: 502,
+            message: { err: `usedCarController.allVehicles, ${error.stack}` },
         })
-        // if not, make me aware of any error
-        .catch(err => {
-            return next({
-                log: `Database error`,
-                status: 502,
-                message: { err: `usedCarController.allVehicles, ${error.stack}` },
-            })
-        })
+    })
 }
 
 // exports the completed usedCarController object
